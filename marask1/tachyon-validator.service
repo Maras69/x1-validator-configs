@@ -1,0 +1,66 @@
+# /etc/systemd/system/tachyon-validator.service
+[Unit]
+Description=Tachyon Validator (X1 mainnet) - marask
+Wants=network-online.target
+
+[Service]
+User=marask
+WorkingDirectory=/home/marask
+Type=simple
+Environment=RUST_LOG=solana_metrics=warn,info
+PermissionsStartOnly=true
+
+# Basic sanity checks and dirs
+ExecStartPre=/usr/bin/test -r /home/marask/.config/solana/identity.json
+ExecStartPre=/usr/bin/test -r /home/marask/.config/solana/vote.json
+ExecStartPre=/bin/mkdir -p /home/marask/ledger
+ExecStartPre=/bin/mkdir -p /home/marask/snapshots
+ExecStartPre=/bin/mkdir -p /mnt/accounts
+ExecStartPre=/bin/touch /home/marask/validator.log
+ExecStartPre=/bin/chown -R marask:marask /home/marask/ledger /home/marask/snapshots /home/marask/validator.log
+
+# --- Team-recommended flags + tmpfs accounts + disk snapshots ---
+ExecStart=/home/marask/tachyon/target/release/tachyon-validator \
+  --identity /home/marask/.config/solana/identity.json \
+  --vote-account /home/marask/.config/solana/vote.json \
+  --entrypoint entrypoint0.mainnet.x1.xyz:8001 \
+  --entrypoint entrypoint1.mainnet.x1.xyz:8001 \
+  --entrypoint entrypoint2.mainnet.x1.xyz:8001 \
+  --entrypoint entrypoint3.mainnet.x1.xyz:8001 \
+  --entrypoint entrypoint4.mainnet.x1.xyz:8001 \
+  --known-validator 7ufaUVtQKzGu5tpFtii9Cg8kR4jcpjQSXwsF3oVPBMZA \
+  --known-validator 5Rzytnub9yGTFHqSmauFLsAbdXFbehMwPBLiuEgKajUN \
+  --known-validator 4V2QkkWce8bwTzvvwPiNRNQ4W433ZsGQi9aWU12Q8uBF \
+  --known-validator CkMwg4TM6jaSC5rJALQjvLc51XFY5pJ1H9f1Tmu5Qdxs \
+  --known-validator 7J5wJaH55ZYjCCmCMt7Gb3QL6FGFmjz5U8b6NcbzfoTy \
+  --only-known-rpc \
+  --log /home/marask/validator.log \
+  --ledger /home/marask/ledger \
+  --accounts /mnt/accounts \
+  --snapshots /home/marask/snapshots \
+  --rpc-port 8899 \
+  --full-rpc-api \
+  --dynamic-port-range 8000-8020 \
+  --wal-recovery-mode skip_any_corrupted_record \
+  --limit-ledger-size 50000000 \
+  --enable-rpc-transaction-history \
+  --full-snapshot-interval-slots 5000 \
+  --maximum-incremental-snapshots-to-retain 10 \
+  --maximum-full-snapshots-to-retain 50
+
+Restart=always
+RestartSec=3
+StartLimitBurst=0
+
+# Light, useful limits
+LimitNOFILE=1000000
+OOMScoreAdjust=-900
+
+# Safe defaults
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=false
+
+[Install]
+WantedBy=multi-user.target

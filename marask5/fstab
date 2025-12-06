@@ -1,0 +1,7 @@
+# /etc/fstab: static file system information
+UUID=dc7258ac-4e20-4f94-8ccd-55b0dea9ace9 / ext4 errors=remount-ro 0 1
+UUID=a839367f-fe8c-4586-ac81-1a358dd6103d /boot ext4 defaults 0 2
+UUID=38D4-81D5 /boot/efi vfat umask=0077 0 1
+UUID=4b6d2e9b-5628-49d0-97ee-e688c738d489 none swap sw 0 0
+#tmpfs /run/accounts tmpfs rw,nodev,nosuid,size=150G 0 0
+tmpfs /mnt/accounts tmpfs defaults,size=120G,uid=1000,gid=1000,mode=0755 0 0

@@ -1,0 +1,10 @@
+[Unit]
+Description=Monthly system maintenance timer
+
+[Timer]
+OnCalendar=*-*-01 02:00
+RandomizedDelaySec=15m
+Persistent=true
+
+[Install]
+WantedBy=timers.target

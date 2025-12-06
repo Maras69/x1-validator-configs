@@ -1,0 +1,9 @@
+/home/marask/validator.log {
+    daily
+    rotate 7
+    compress
+    missingok
+    notifempty
+    copytruncate
+    size 500M
+}

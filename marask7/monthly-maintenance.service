@@ -1,0 +1,7 @@
+[Unit]
+Description=Monthly system update/upgrade/cleanup for Tachyon validator
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/update_upgrade_clean.sh
+Nice=10

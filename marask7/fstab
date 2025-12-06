@@ -1,0 +1,22 @@
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/vda1 during installation
+UUID=304c277b-87bc-4ba4-a3ae-a5e2746c1414 / ext4 defaults,noatime,nodiratime,errors=remount-ro 0 1
+
+UUID=e4e9c1e6-ec39-44db-84fc-e3869676ad3b /boot ext4 errors=remount-ro 0 1
+
+# swap was on /dev/sda2 during installation
+
+UUID=9957fad9-da83-44d1-b7ae-98b285df1952 none swap sw 0 0
+
+# OLD UNUSED: tmpfs /run/accounts tmpfs size=16G,mode=0755,uid=marask,gid=marask 0 0
+
+
+# Accounts bind mount
+#/run/accounts-new  /home/marask/accounts  none  bind  0  0
+tmpfs /mnt/accounts tmpfs defaults,size=120G,uid=1000,gid=1000,mode=0755 0 0

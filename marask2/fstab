@@ -1,0 +1,15 @@
+proc /proc proc defaults 0 0
+# efi-boot-partiton
+UUID=2803-3D1E /boot/efi vfat umask=0077 0 1
+# /dev/md/0
+UUID=aa066850-c344-4d15-8536-388c73931dad /boot ext4 defaults 0 0
+# /dev/md/1
+UUID=0e4d65ae-a234-4fdc-99d7-2ca6242c15a8 / ext4 defaults 0 0
+/swapfile none swap sw 0 0
+tmpfs   /tmp        tmpfs   rw,nosuid,nodev,noexec,relatime,size=8G,mode=1777   0  0
+tmpfs   /var/tmp    tmpfs   rw,nosuid,nodev,relatime,size=2G,mode=1777          0  0
+
+# Accounts tmpfs for Tachyon validator
+# MIGRATED TO SYSTEMD: tmpfs /run/accounts tmpfs rw,nosuid,nodev,noexec,mode=0755,uid=1000,gid=1000,size=150G 0 0
+# MIGRATED TO SYSTEMD: /run/accounts  /home/marask/ledger/accounts  none  bind  0  0
+tmpfs /mnt/accounts tmpfs defaults,size=120G,uid=1000,gid=1000,mode=0755 0 0

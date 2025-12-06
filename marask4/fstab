@@ -1,0 +1,19 @@
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/vda1 during installation
+UUID=2c736e1a-bfb3-4da2-a672-8b7531d415a8 / ext4 errors=remount-ro 0 1
+
+UUID=6fed0010-8eba-4c9d-ac4f-636f284d6cf1 /boot ext4 errors=remount-ro 0 1
+
+UUID=36e0668c-9065-41b9-8bc6-1db900abcd70 none swap sw 0 0
+UUID=F1DD-F559 /boot/efi vfat errors=remount-ro 0 1
+
+# Accounts tmpfs for Tachyon validator
+# MIGRATED TO SYSTEMD: tmpfs /run/accounts tmpfs rw,nosuid,nodev,noexec,mode=0755,uid=1000,gid=1000,size=150G 0 0
+# MIGRATED TO SYSTEMD: /run/accounts  /home/marask/ledger/accounts  none  bind  0  0
+tmpfs /mnt/accounts tmpfs defaults,size=120G,uid=1000,gid=1000,mode=0755 0 0

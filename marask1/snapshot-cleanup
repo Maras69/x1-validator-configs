@@ -1,0 +1,5 @@
+#!/bin/bash
+# Clean incremental snapshots older than 7 days
+find /home/marask/snapshots -name "incremental-snapshot-*.tar.zst" -mtime +7 -delete 2>/dev/null
+# Keep only last 10 full snapshots
+ls -t /home/marask/snapshots/snapshot-*.tar.zst 2>/dev/null | tail -n +11 | xargs -r rm -f
