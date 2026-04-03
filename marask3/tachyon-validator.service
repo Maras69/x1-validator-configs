@@ -18,7 +18,6 @@ ExecStartPre=/bin/chown -R junior:junior /home/junior/ledger /home/junior/snapsh
 ExecStart=/home/junior/tachyon/target/release/tachyon-validator \
   --identity /home/junior/.config/solana/identity.json \
   --vote-account /home/junior/.config/solana/vote.json \
-  --entrypoint entrypoint0.mainnet.x1.xyz:8001 \
   --entrypoint entrypoint1.mainnet.x1.xyz:8001 \
   --entrypoint entrypoint2.mainnet.x1.xyz:8001 \
   --entrypoint entrypoint3.mainnet.x1.xyz:8001 \
@@ -34,7 +33,7 @@ ExecStart=/home/junior/tachyon/target/release/tachyon-validator \
   --accounts /run/accounts \
   --snapshots /home/junior/snapshots \
   --rpc-port 8899 \
-  --dynamic-port-range 8000-8020 \
+  --dynamic-port-range 8000-10000 \
   --wal-recovery-mode skip_any_corrupted_record \
   --limit-ledger-size 50000000 \
   --full-snapshot-interval-slots 5000 \
