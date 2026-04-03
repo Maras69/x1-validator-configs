@@ -7,8 +7,8 @@ After=network-online.target
 User=marask
 WorkingDirectory=/home/marask
 Type=simple
+PermissionsStartOnly=true
 Environment=RUST_LOG=warn,solana_metrics=warn
-
 ExecStartPre=/usr/bin/test -r /home/marask/.config/solana/identity.json
 ExecStartPre=/usr/bin/test -r /home/marask/.config/solana/vote.json
 ExecStartPre=/bin/mkdir -p /run/accounts
