@@ -1,8 +1,6 @@
 [Unit]
-Description=Monthly system update/upgrade/clean
-After=network-online.target
+Description=Monthly System Maintenance
 
 [Service]
 Type=oneshot
 ExecStart=/usr/local/sbin/update_upgrade_clean.sh
-Nice=10

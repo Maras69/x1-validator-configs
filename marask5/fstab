@@ -1,7 +1,13 @@
-# /etc/fstab: static file system information
-UUID=dc7258ac-4e20-4f94-8ccd-55b0dea9ace9 / ext4 errors=remount-ro 0 1
-UUID=a839367f-fe8c-4586-ac81-1a358dd6103d /boot ext4 defaults 0 2
-UUID=38D4-81D5 /boot/efi vfat umask=0077 0 1
-UUID=4b6d2e9b-5628-49d0-97ee-e688c738d489 none swap sw 0 0
-#tmpfs /run/accounts tmpfs rw,nodev,nosuid,size=150G 0 0
-tmpfs /mnt/accounts tmpfs defaults,size=120G,uid=1000,gid=1000,mode=0755 0 0
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+/dev/disk/by-uuid/f99e21fa-81dd-4e6d-97be-c955568b26ca none swap sw 0 0
+# / was on /dev/sda3 during curtin installation
+/dev/disk/by-uuid/698d548d-c1da-4ce8-8b71-6b6601c573a9 / ext4 defaults 0 1
+# /boot/efi was on /dev/sda1 during curtin installation
+/dev/disk/by-uuid/7B96-59D9 /boot/efi vfat defaults 0 1
+tmpfs /run/accounts tmpfs size=120G,nodev,nosuid,noexec,noatime,nodiratime 0 0

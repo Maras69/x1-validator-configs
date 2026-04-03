@@ -1,0 +1,10 @@
+/home/junior/validator.log {
+  daily
+  size 512M
+  rotate 14
+  compress
+  delaycompress
+  missingok
+  notifempty
+  copytruncate
+}

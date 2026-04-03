@@ -5,12 +5,9 @@
 # that works even if disks are added and removed. See fstab(5).
 #
 # <file system> <mount point>   <type>  <options>       <dump>  <pass>
-# / was on /dev/vda1 during installation
-UUID=a6091a4e-d1b0-47ff-a7e9-41d23a925db0 / ext4 errors=remount-ro 0 1
-
-UUID=66d72520-ae94-432d-be92-7da1fc6e2612 /boot ext4 errors=remount-ro 0 1
-
-UUID=3af04e56-774c-4487-9321-8cadbab8707e none swap sw 0 0
-UUID=977D-5B99 /boot/efi vfat errors=remount-ro 0 1
-#tmpfs  /run/accounts  tmpfs  defaults,size=150G,uid=1001,gid=1001  0  0
-tmpfs /mnt/accounts tmpfs defaults,size=120G,uid=1001,gid=1001,mode=0755 0 0
+/dev/disk/by-uuid/b20346f8-1d31-4d5c-9125-52fc190ce241 none swap sw 0 0
+# / was on /dev/sda3 during curtin installation
+/dev/disk/by-uuid/fe75b6e4-55b5-48c4-8649-6bfa73637c44 / ext4 defaults 0 1
+# /boot/efi was on /dev/sda1 during curtin installation
+/dev/disk/by-uuid/C540-4B54 /boot/efi vfat defaults 0 1
+tmpfs /run/accounts tmpfs defaults,size=120G,noatime 0 0

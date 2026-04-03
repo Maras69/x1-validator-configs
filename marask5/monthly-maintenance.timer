@@ -1,9 +1,8 @@
 [Unit]
-Description=Monthly system maintenance timer
+Description=Monthly System Maintenance Timer
 
 [Timer]
-OnCalendar=*-*-01 04:00
-RandomizedDelaySec=15m
+OnCalendar=monthly
 Persistent=true
 
 [Install]

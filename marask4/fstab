@@ -5,15 +5,10 @@
 # that works even if disks are added and removed. See fstab(5).
 #
 # <file system> <mount point>   <type>  <options>       <dump>  <pass>
-# / was on /dev/vda1 during installation
-UUID=2c736e1a-bfb3-4da2-a672-8b7531d415a8 / ext4 errors=remount-ro 0 1
-
-UUID=6fed0010-8eba-4c9d-ac4f-636f284d6cf1 /boot ext4 errors=remount-ro 0 1
-
-UUID=36e0668c-9065-41b9-8bc6-1db900abcd70 none swap sw 0 0
-UUID=F1DD-F559 /boot/efi vfat errors=remount-ro 0 1
-
-# Accounts tmpfs for Tachyon validator
-# MIGRATED TO SYSTEMD: tmpfs /run/accounts tmpfs rw,nosuid,nodev,noexec,mode=0755,uid=1000,gid=1000,size=150G 0 0
-# MIGRATED TO SYSTEMD: /run/accounts  /home/marask/ledger/accounts  none  bind  0  0
-tmpfs /mnt/accounts tmpfs defaults,size=120G,uid=1000,gid=1000,mode=0755 0 0
+/dev/disk/by-uuid/33ab4270-2e79-4b57-a647-f3ffc875a9dd none swap sw 0 0
+# / was on /dev/sda3 during curtin installation
+/dev/disk/by-uuid/3085d731-354a-48ad-b4a9-6c76999f30f2 / ext4 defaults 0 1
+# /boot/efi was on /dev/sda1 during curtin installation
+/dev/disk/by-uuid/1CC6-49FC /boot/efi vfat defaults 0 1
+tmpfs /home/marask/accounts tmpfs defaults,size=150G,uid=1001,gid=1001 0 0
+tmpfs /run/accounts tmpfs size=50G,noatime 0 0
